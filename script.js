@@ -1,4 +1,5 @@
 const listOfWords = [
+  
     ["FeS\u2082", "пирит, темір колчеданы"],
     ["CaCO\u2083*MgCO\u2083", "доломит"],
     ["NaCl", "галит/тас тұзы"],
@@ -37,7 +38,7 @@ const listOfWords = [
     ["MgSO\u2084*7H\u2082O","ағылшын тұзы"],
     ["Al\u2082O\u2083","глинозем/корунд/боксит"],
     ["HCl*3HNO\u2083", "патша сұйықтығы"],
-    ["H\u2082SO\u2084*SO\u2083", "олуем"],
+    ["H\u2082SO\u2084*SO\u2083", "олеум"],
     ["BaSO\u2084", "барит"],
     ["Ca(OH)\u2082 (конц)", "әк сүті"],
     ["NaOH","күйдіргіш натрий"],
@@ -47,8 +48,9 @@ const listOfWords = [
     ["N\u2082O","шаттандырғыш газ"],
     ["KCl*NaCl", "сильвинит"],
     ["MgO", "күйдірілген магнезия"],
-    ["FeSO\u2084*7H\u2082O", "Темір купоросы"],
     ["H\u2082O\u2082","сутек пероксиді"],
+   
+
    
 ];
 
@@ -69,12 +71,19 @@ let words = [];
 let definitions = [];
 let score = 0;
 let isPlaying = false;
+let matchedWords = [];
+
+
 
 // Create a map of Spanish words to English definitions
 
 
 function startGame() {
-  const wordsData = getRandomArrays(listOfWords, 10);  
+  let reviewContainer = document.getElementById('review-container');
+  reviewContainer.innerHTML = "";
+  reviewContainer.style.display = "none";
+  const wordsData = getRandomArrays(listOfWords, 10);
+  matchedWords = [...wordsData];
   if (isPlaying) return; // Prevent starting a new game while one is already in progress
   const wordMap = new Map(wordsData);
 
@@ -128,7 +137,6 @@ function startGame() {
       if (wordIndex !== -1 && wordMap.get(draggedWord) === definition) {
         score++;
         document.getElementById('score').textContent = score;
-
         // Ensure the word element exists before removing
         const wordElementToRemove = wordsContainer.children[wordIndex];
         if (wordElementToRemove) {
@@ -160,12 +168,65 @@ function startGame() {
     definitionsContainer.appendChild(definitionElement);
   });
 }
+// function gameOver() {
+//   isPlaying = false;
+//   document.getElementById('play-again-button').disabled = false;
+//   document.getElementById('message-container').textContent = `Songy upay ${score}.`;
+// }
+
 
 function gameOver() {
   isPlaying = false;
-  document.getElementById('play-again-button').disabled = false;
-  document.getElementById('message-container').textContent = `Songy upay ${score}.`;
+  // Use the existing #review-container element if already created
+  let reviewContainer = document.getElementById('review-container');
+  if (!reviewContainer) {
+    reviewContainer = document.createElement('div');
+    reviewContainer.id = 'review-container';
+    document.body.appendChild(reviewContainer);
+  }
+  console.log(matchedWords);
+  // Clear existing review elements before adding new ones
+  reviewContainer.innerHTML = "";
+  // matchedWords.forEach((word, index) => {
+  //   const reviewElement = document.createElement('div');
+  //   reviewElement.textContent = word + " - " + definitions[index]; // Use definitions array
+  //   reviewContainer.appendChild(reviewElement);
+  // });
+
+
+  matchedWords.forEach(pair => {
+    const wordPairDiv = document.createElement('div');
+    wordPairDiv.classList.add('word-pair'); // Add a class for styling
+  
+    // Create span elements for each word
+    const formulas = document.createElement('div');
+    formulas.textContent = pair[0];
+    formulas.classList.add('formula-word'); // Add a class for styling
+  
+    const names = document.createElement('div');
+    names.textContent = pair[1];
+    names.classList.add('name-word'); // Add a class for styling
+  
+    // Append spans to the div in desired order
+    wordPairDiv.appendChild(names);
+    wordPairDiv.appendChild(formulas);
+  
+    // Append the word pair div to the container
+    reviewContainer.appendChild(wordPairDiv);
+  });
+
+  // Show the review container (make sure it's visible)
+  reviewContainer.style.display = 'flex'; // Assuming it's hidden initially
+
+  // Use the existing play-again-button instead of creating a new one
+  const restartButton = document.getElementById('play-again-button');
+  restartButton.disabled = false; // Enable the button
+  matchedWords = [];
+  // Optionally, set different text for the button:
+  // restartButton.textContent = 'Review & Restart';
+  
 }
+
 
 // Event listener for play again button
 document.getElementById('play-again-button').addEventListener('click', startGame);

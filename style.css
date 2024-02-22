@@ -46,10 +46,41 @@ body {
     padding: 0.5rem 1rem;
     border-radius: 4px;
     background-color: #88bbea;
-    cursor: pointer;rgb(66, 5, 5)rgb(15, 5, 66)
+    z-index: 3;
 }
 
 #message-container {
     font-weight: bold;
-    margin: 1rem 0;
+    margin: 1rem 0; 
+}
+
+#review-container {
+    position: fixed; /* Make it fixed to stay in place */
+    bottom: 20%; /* Top position */
+    left: 10%; /* Left position */
+    width: 80%; /* Full width */
+    height: 60%; /* Full height */
+    background-color: rgba(20, 1, 1, 0.084); /* Transparent overlay */
+    display: flex; /* Allow centering content */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+  }
+
+
+.word-pair {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    padding: 0;
+    width: 100%;
+}
+
+.formula-word, .name-word {
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
