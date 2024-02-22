@@ -41,6 +41,8 @@ body {
 }
 
 #play-again-button {
+    position: relative;
+    bottom: 1%;
     display: block;
     margin-top: 1rem;
     padding: 0.5rem 1rem;
