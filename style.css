@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-image: linear-gradient(to right, #00416a, #e4e5e6);
+}
+
+#game-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+#words-container,
+#definitions-container {
+    padding: 1rem;
+    width: 45%;
+    min-height: 300px;
+    overflow-y: auto;
+}
+
+#words-container span {
+    color: white;
+    display: block;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    background-color: #49415360;
+}
+
+#definitions-container span {
+    display: block;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    background-color: #3f415230;
+}
+
+#score-container {
+    margin-top: 1rem;
+}
+
+#play-again-button {
+    display: block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    background-color: #88bbea;
+    cursor: pointer;rgb(66, 5, 5)rgb(15, 5, 66)
+}
+
+#message-container {
+    font-weight: bold;
+    margin: 1rem 0;
+}
